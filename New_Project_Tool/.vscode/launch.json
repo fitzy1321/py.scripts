@@ -1,0 +1,11 @@
+{
+    "name": "Python: Project Creation App",
+    "type": "python",
+    "request": "launch",
+    "program": "${workspaceFolder}/creator.py",
+    "console" : "internalConsole",
+    "args" : ["CoolBeansProject", "--port", "1593"],
+    "linux" : {
+        "pythonPath" : "/repo/python/New_Project_Tool/venv/bin/python"
+    }
+}
