@@ -1,0 +1,16 @@
+{
+  "qa_api_url": "qa-api-tpt.gohfc.com",
+  "service_csproj_path": "C:/source/hfc/touchpointtest/HFC.CRM.Service/HFC.CRM.Service.csproj",
+  "user": {
+    "UserName": "HFCAdmin",
+    "Password": "HFC@19000"
+  },
+  "api_url": "http://localhost:49301/",
+  "access_token": {
+    "token_str": "DHobomx4atiZHTjBtUUXVVmMFFRCrF1CwsFgjfO6oVjZgjj-rILQJI1MiD23tvyEmppM2hycGkTyZNvJwImmYAcS-YtiQwICJsr4HS41C4ea4CrHcF9AI3pdYC3l5k-ihkpbwBWPVoHUchQIGyTigVgE1bNwXpXgJibK4sHH427lla8kht4G5b7RHuY8YZcrgmuLi6a7TFB3zgDxA_xHAA",
+    "type": "Bearer",
+    "issued": "2020-03-19T22:15:21.5421142Z",
+    "expires": "2020-03-19T23:15:21.5421142Z",
+    "scope": "api"
+  }
+}
