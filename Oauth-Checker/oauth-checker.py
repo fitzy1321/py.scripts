@@ -121,3 +121,6 @@ def main():
     get_user_info(auth_header, api_url)
 # end of main #
 
+
+if __name__ == '__main__':
+    main()
