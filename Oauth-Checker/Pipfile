@@ -6,7 +6,6 @@ verify_ssl = true
 [dev-packages]
 pylint = "*"
 v = {editable = true,version = "*"}
-pylama = "*"
 autopep8 = "*"
 pydocstyle = "*"
 pycodestyle = "*"

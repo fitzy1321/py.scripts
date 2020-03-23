@@ -9,8 +9,7 @@ def get_request(url: str, headers=None, data=None):
     headers = "" if headers is None else headers
     try:
         if data is None:
-            res = requests.get(
-                url=url, headers=headers)
+            res = requests.get(url=url, headers=headers)
         else:
             res = requests.get(url=url, data=data, headers=headers)
 

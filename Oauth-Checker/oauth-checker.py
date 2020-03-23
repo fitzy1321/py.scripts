@@ -5,37 +5,32 @@ Note: MUST HAVE HFC.CRM.Service RUNNING IN DEBUGGER.
 This script will hit the 'token' endpoint to get a Bearer token.
 It will then uses the token to make a couple requests against the api.
 """
+
 from datetime import datetime
-from xml.dom import minidom
 
 import requests
 
 from src.config import ConfigManager
+from src.helpers import exit_now, get_debug_url
 from src.requests_fn import get_request, post_request
-from src.helpers import exit_now
 
 __tokenKey__ = "access_token"
 __tokenStrKey__ = "token_str"
 __urlKey__ = "api_url"
-__pathKey__ = "service_csproj_key"
 __expkey__ = "expires"
+__pathKey__ = "service_csproj_key"
 # __qaApiKey = "qa_api_url"
-
-
-def get_oauth_server_url(config: ConfigManager):
-    """Get debug url from HFC.CRM.Service csproj file."""
-    if __urlKey__ not in config:
-        doc = minidom.parse([config[__urlKey__]])
-        config[__urlKey__] = doc.getElementsByTagName("IISUrl")[0] \
-            .firstChild.nodeValue
-
-    return config[__urlKey__]
 
 
 def get_token_from_api(oauth_url: str, user_model: dict):
     """Goes to url with user data to retrieve Auth Token.
 
-    Returns: dict {token, type, issued, expires, scope} all strings
+    Arguments:
+        oauth_url {str} -- [description]
+        user_model {dict} -- [description]
+
+    Returns:
+        dict {token, type, issued, expires, scope} -- values are all strings
     """
     res = post_request(url=oauth_url, data=user_model)
     print(f"Status Code from Auth Endpoint: {res.status_code}")
@@ -58,8 +53,10 @@ def get_token(config: ConfigManager, api_url: str):
     token_endpoint = api_url + "token"
 
     if __tokenKey__ not in config:
-        print(f"No Token stored in app data."
-              "\nCalling {token_endpoint} for bearer token")
+        print(
+            "No Token stored in app data."
+            f"\nCalling {token_endpoint} for bearer token"
+        )
         token = get_token_from_api(token_endpoint, config["user"])
         config[__tokenKey__] = token
         return token
@@ -78,19 +75,6 @@ def get_token(config: ConfigManager, api_url: str):
     return token
 
 
-def get_user_info(auth_header: dict, api_url: str):
-    """Call 'api/GetUserInfo' endpoint with auth header."""
-    user_endpoint = api_url + 'api/GetUserInfo'
-
-    print(f"\n\nCalling {user_endpoint} with Auth Header...\n")
-
-    # calling api here
-    res = get_request(url=user_endpoint, headers=auth_header)
-    print(f"Status from GetUserInfo Endpoint: {res.status_code}")
-    print(f"Headers from Response: {res.headers}")
-    print(f"\nContent from GetUserInfo API: {res.json()}")
-
-
 def main():
     """Run main function of script."""
     print()  # just to start console on new
@@ -100,25 +84,41 @@ def main():
         print(f"file {config.__datafile__} is missing")
         exit()
 
-    # Get url for api
-    api_url = get_oauth_server_url(config)
+    if __urlKey__ not in config:
+        print(
+            f"Please enter the url for the api in app.data.json with key "
+            "'{__urlKey__}'."
+        )
+        exit_now()
+
+    api_url = config[__urlKey__]
 
     # checking if url is correct
-    print("Checking if api is up ...")
+    print(f"Checking if api at {api_url} is up ...")
     check_api = get_request(api_url)
     if check_api.status_code is not 200:
         print(f"Could not reach {check_api}...")
         print("Either the url is wrong, or the api is not up.")
         print("Please change the url in app.data.json file or debug the api.")
         exit_now()
+    else:
+        print(f"API url {api_url} is working!\n")
 
+    # Get Auth Token and Create Auth Header
     token = get_token(config, api_url)
-
     auth_header = {"Authorization": f"Bearer {token[__tokenStrKey__]}"}
-
     print(f"\nGenerated Auth Header: {auth_header}")
 
-    get_user_info(auth_header, api_url)
+    # Hit GetUserInfo endpoint
+    user_endpoint = api_url + 'api/GetUserInfo'
+    print(f"\n\nCalling {user_endpoint} with Auth Header...\n")
+
+    # calling api here
+    res = get_request(url=user_endpoint, headers=auth_header)
+    print(f"Status from GetUserInfo Endpoint: {res.status_code}")
+    print(f"Headers from Response: {res.headers}")
+    print(f"\nContent from GetUserInfo API: {res.json()}")
+
 # end of main #
 
 

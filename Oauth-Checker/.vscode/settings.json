@@ -1,6 +1,5 @@
 {
   // "python.pythonPath": "C:\\Users\\joe.fitzgibbons\\.virtualenvs\\Oauth-Checker-EfD3FSeO\\Scripts\\python.exe",
-  "python.pythonPath": "/home/mojo/.local/share/virtualenvs/Oauth-Checker-DslXZ2ak/bin/python",
   "python.linting.enabled": true,
   "python.formatting.provider": "autopep8",
   "python.linting.pylintEnabled": true,
