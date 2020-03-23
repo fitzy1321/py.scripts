@@ -6,5 +6,6 @@
   "python.linting.pylamaEnabled": false,
   "python.linting.pydocstyleEnabled": true,
   "python.linting.pycodestyleEnabled": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "python.pythonPath": "/home/mojo/.local/share/virtualenvs/Oauth-Checker-DslXZ2ak/bin/python"
 }
