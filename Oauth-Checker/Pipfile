@@ -8,6 +8,8 @@ pylint = "*"
 v = {editable = true,version = "*"}
 pylama = "*"
 autopep8 = "*"
+pydocstyle = "*"
+pycodestyle = "*"
 
 [packages]
 requests = "*"

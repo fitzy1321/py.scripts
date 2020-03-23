@@ -1,12 +1,7 @@
 """Modules Containing Requests Functions."""
 
 import requests
-
-
-def exit_now():
-    """Exit program now."""
-    print("Closing Program")
-    exit()
+from src.helpers import exit_now
 
 
 def get_request(url: str, headers=None, data=None):
