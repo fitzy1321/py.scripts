@@ -5,12 +5,12 @@
     "UserName": "HFCAdmin",
     "Password": "HFC@19000"
   },
-  "api_url": "http://localhost:49301/",
+  "api_url": "https://dev2-tpt.gohfc.com/TPT-Api/",
   "access_token": {
-    "token_str": "DHobomx4atiZHTjBtUUXVVmMFFRCrF1CwsFgjfO6oVjZgjj-rILQJI1MiD23tvyEmppM2hycGkTyZNvJwImmYAcS-YtiQwICJsr4HS41C4ea4CrHcF9AI3pdYC3l5k-ihkpbwBWPVoHUchQIGyTigVgE1bNwXpXgJibK4sHH427lla8kht4G5b7RHuY8YZcrgmuLi6a7TFB3zgDxA_xHAA",
+    "token_str": "tBhm1-N64Y8ysJs8NDa91rk79dRGOCzZ_BKctIGd6iiT9yeRNnhYimiaHdmpU_NF-5JuDmD_DBySTJdy5mJYk3wJ7qfLHPoJhgNiB8VZfhv0KL7Uh7buOQHQLR75NVoI8jG9xKdTvZZmZExLzZBUn5h0a-fLVk1_LGplKzo6hi_GK5uCdQMcQnD5QinMfcqsl9zobttKb7Ko899DqqvZvw",
     "type": "Bearer",
-    "issued": "2020-03-19T22:15:21.5421142Z",
-    "expires": "2020-03-19T23:15:21.5421142Z",
+    "issued": "2020-03-20T19:35:30.2334718Z",
+    "expires": "2020-03-20T20:35:30.2334718Z",
     "scope": "api"
   }
 }

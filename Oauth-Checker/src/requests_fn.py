@@ -1,12 +1,7 @@
 """Modules Containing Requests Functions."""
 
 import requests
-
-
-def exit_now():
-    """Exit program now."""
-    print("Closing Program")
-    exit()
+from src.helpers import exit_now
 
 
 def get_request(url: str, headers=None, data=None):
@@ -14,8 +9,7 @@ def get_request(url: str, headers=None, data=None):
     headers = "" if headers is None else headers
     try:
         if data is None:
-            res = requests.get(
-                url=url, headers=headers)
+            res = requests.get(url=url, headers=headers)
         else:
             res = requests.get(url=url, data=data, headers=headers)
 
