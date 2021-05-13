@@ -7,7 +7,7 @@ from src import run
 
 if __name__ == "__main__":
 
-    if (sys.version_info.major, sys.version_info.minor) != (3, 7):
+    if (sys.version_info.major, sys.version_info.minor) != (3, 8):
         print(
             """You must use python 3.7.3 or greater to run this app.
             ~

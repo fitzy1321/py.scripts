@@ -5,7 +5,6 @@ import src.args as cli_args
 from src.factory import project_factory
 import os
 
-
 def change_working_dir(path: str):
     _path = os.getcwd() + path if not os.path.isabs(path) else path
 

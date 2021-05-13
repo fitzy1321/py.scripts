@@ -14,7 +14,7 @@ class PyProj(CliBase):
         CliBase.create_std_files(self)
 
     def _make_virtual_env(self):
-        CliBase.call_cli(self, f"python{'3.7' if self._version is '' else self._version} -m venv venv")
+        CliBase.call_cli(self, f"python{'3.7' if self._version == '' else self._version} -m venv venv")
 
 
 # TODO: figure out this mess
