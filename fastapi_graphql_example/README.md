@@ -1,1 +1,0 @@
-FastAPI and GraphQL Example
