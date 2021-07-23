@@ -42,21 +42,14 @@ def auto_click(sleep_time: int = None) -> None:
 
 def main() -> None:
     """Primary loop for auto clicker script."""
-    print("Taking a break...")
+    print("Clicking away...")
 
     while True:
         try:
             auto_click()
-        # except pyautogui.FailSafeException:
-        #     # This Exception gets thrown when mouse is in one of the corners of the screen
-        #     # Used to escape mouse spawms, but I don't need it for this script
-        #     if PRINT_DEBUG:
-        #         print("pyautogui.FailSafeException was thrown, but it was ignored")
         except KeyboardInterrupt:
-            if __PRINT_DEBUG:
-                print("KeyboardInterrupt thrown and caught. Exiting script")
-            else:
-                print("Back to work!")
+            msg = "KeyboardInterrupt thrown and caught. Exiting script" if __PRINT_DEBUG else "Back to work!"
+            print(msg)
             break
 
 
@@ -64,10 +57,13 @@ if __name__ == "__main__":
     args = None
     try:
         args = sys.argv[1:]
-        # check for debug flag
-        __PRINT_DEBUG = "--debug" in args or "-d" in args
-        # check for fast click flag
-        __FAST_CLICK = "--fast-click" in args or "-fc" in args
+        d_flags = ["--debug", "-d"]
+        fc_flags = ["--fast-click", "-f", "-fc"]
+
+        # check for debug flag, with generator expression
+        __PRINT_DEBUG = any((df in args) for df in d_flags)
+        # check for fast click flag, with generator expression
+        __FAST_CLICK = any((ff in args) for ff in fc_flags)
 
     except IndexError:
         pass
