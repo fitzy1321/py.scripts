@@ -65,9 +65,9 @@ async def read_item(item_id: str):
 
 
 @app.get("/items/{item_id}")
-async def read_items_with_options(item_id: int, _q: str = None):
+async def read_items_with_options(item_id: int, q: str = None):
     """Read Item from query string."""
-    return {"item_id": item_id, "q": _q}
+    return {"item_id": item_id, "q": q}
 
 
 @app.put("/items/{item_id}")

@@ -12,9 +12,9 @@ Following the Offical Docs [here][1]
 - [x] First Steps
 - [x] Path Parameters
 - [x] Query Parameters
-- [ ] Request Body
-- [ ] Query Parameter and String Validations
-- [ ] Path Parameters and Numeric Validations
+- [x] Request Body
+- [x] Query Parameter and String Validations
+- [x] and Numeric Validations
 - [ ] Body - Multiple Parameters
 - [ ] Body - Fields
 - [ ] Body - Nested Models
