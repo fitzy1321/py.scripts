@@ -1,6 +1,6 @@
 """Request Body section of FastAPI Tutorial."""
 
-from typing import Any, Optional
+from typing import Any, Dict, Optional
 from fastapi import FastAPI, Path, Query
 from pydantic import BaseModel
 
@@ -70,7 +70,7 @@ async def read_items(
     )
 ):
     """Advanced use cases of Query type."""
-    results: dict[str, Any] = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    results: Dict[str, Any] = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
     if q:
         results.update({"q": q})
     return results
@@ -83,4 +83,4 @@ async def update_item(
     q: Optional[str] = None,
     item: Optional[Item] = None
 ):
-    pass
+    """Demonstrate Path type and numeric data."""
