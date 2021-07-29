@@ -79,8 +79,8 @@ async def read_items(
 @app.put("/items/{item_id}")
 async def update_item(
     *,
-    item_id: int = Path(..., title="The ID of the item to get", ge=0, le=1000),
-    q: Optional[str] = None,
-    item: Optional[Item] = None
+    item_id: int = Path(..., title="The ID of the item to get", ge=0, le=1000), # Path var
+    q: Optional[str] = None, # Query var
+    item: Optional[Item] = None # Body var
 ):
     """Demonstrate Path type and numeric data."""
