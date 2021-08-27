@@ -2,15 +2,18 @@ import motor.motor_asyncio
 
 from model import Todo
 
-client = motor.motor_asyncio.AsyncIOMotorClient("mongodb://localhost:27017")
+client = motor.motor_asyncio.AsyncIOMotorClient(
+    "mongodb+srv://mongoDbUser:joHgyfnZPIVSUoNe@cluster0.kgulu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+)
 database = client.TodoList
 collection = database.todo
 
 
-async def create_todo(todo: Todo):
-    document = todo.dict()
-    result = await collection.insert_one(document)
-    return result
+async def create_todo(todo):
+    result = await collection.insert_one(todo.__dict__)
+    if not result:
+        return None
+    return todo
 
 
 async def read_one_todo(title: str):

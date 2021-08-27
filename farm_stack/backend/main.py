@@ -13,7 +13,7 @@ from model import Todo
 app = FastAPI()
 
 
-origins = ["https://localhost:3000"]
+origins = ["https://localhost:3000", "http://localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -35,7 +35,7 @@ async def get_todo():
     return response
 
 
-@app.get("/api/todo{title}", response_model=Todo)
+@app.get("/api/todo/{title}", response_model=Todo)
 async def get_todo_by_id(title):
     response = await read_one_todo(title)
     if response:
@@ -53,19 +53,20 @@ async def post_todo(todo: Todo):
         raise HTTPException(400, "Something went wrong")
 
 
-@app.put("/api/todo{title}", response_model=Todo)
+@app.put("/api/todo/{title}", response_model=Todo)
 async def put_todo(title: str, desc: str):
     response = await update_todo(title=title, description=desc)
     if response:
         return response
     else:
-        raise HTTPException(404, f"There is no Todo item with this title: {title}.")
+        raise HTTPException(500, f"There is no Todo item with this title: {title}.")
 
 
-@app.delete("/api/todo{title}")
-async def delete_todo(title):
-    response = await remove_todo(title)
+@app.delete("/api/todo/{title}")
+async def delete_todo(title: str):
+    clean_title = title.replace("%20", " ")
+    response = await remove_todo(clean_title)
     if response:
         return "Successfully deleted todo item!"
     else:
-        raise HTTPException(404, f"There is no Todo item with this title: {title}.")
+        raise HTTPException(500, f"There is no Todo item with this title: {title}.")
