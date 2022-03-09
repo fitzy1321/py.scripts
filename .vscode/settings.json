@@ -1,6 +1,4 @@
 {
-    "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
-    "python.linting.pydocstyleEnabled": true,
     "python.formatting.provider": "black"
 }
