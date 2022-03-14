@@ -1,7 +1,8 @@
 """Helper Functions."""
 
-from src.config import ConfigManager
 from xml.dom import minidom
+
+from src.config import ConfigManager
 
 
 def exit_now():

@@ -16,6 +16,6 @@ def fibonacci(n):
     return fibonacci(n - 1) + fibonacci(n - 2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     for n in range(0, 101):
         print(f"{n}: {fibonacci(n)}")

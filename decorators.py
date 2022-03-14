@@ -1,9 +1,10 @@
 def decorator(func):
     def wrapper(*args, **kwargs):
-        print('In Decorator: ')
-        print(f'Args: {args}')
-        print(f'Kwargs: {kwargs}')
+        print("In Decorator: ")
+        print(f"Args: {args}")
+        print(f"Kwargs: {kwargs}")
         return func(*args, **kwargs)
+
     return wrapper
 
 
@@ -19,6 +20,6 @@ def fib(n):
     return fib(n - 1) + fib(n - 2)
 
 
-print_message('Hello from Python!')
+print_message("Hello from Python!")
 
 print([fib(n) for n in range(20)])

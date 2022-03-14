@@ -1,6 +1,7 @@
 """Modules Containing Requests Functions."""
 
 import requests
+
 from src.helpers import exit_now
 
 
@@ -18,7 +19,7 @@ def get_request(url: str, headers=None, data=None):
         requests.exceptions.HTTPError,
         ConnectionRefusedError,
         requests.exceptions.ConnectTimeout,
-        requests.exceptions.ConnectionError
+        requests.exceptions.ConnectionError,
     ):
         print("A Problem occured trying to hit api")
         print("Please check url in app.data.json is correct or")
@@ -40,7 +41,7 @@ def post_request(url: str, data=None, headers=None):
         requests.exceptions.HTTPError,
         ConnectionRefusedError,
         requests.exceptions.ConnectTimeout,
-        requests.exceptions.ConnectionError
+        requests.exceptions.ConnectionError,
     ):
         print("A Problem occured trying to hit api")
         print("Please check url in app.data.json is correct or")

@@ -44,7 +44,7 @@ def get_token_from_api(oauth_url: str, user_model: dict):
         "type": str(data["token_type"]).capitalize(),
         "issued": data["issued"],
         __expkey__: data["expires"],
-        "scope": data["scope"]
+        "scope": data["scope"],
     }
 
 
@@ -64,8 +64,8 @@ def get_token(config: ConfigManager, api_url: str):
         token = config[__tokenKey__]
 
     # check if token has expired
-    token_exp_str = token[__expkey__].split('.')[0]
-    if datetime.strptime(token_exp_str, '%Y-%m-%dT%H:%M:%S') < datetime.now():
+    token_exp_str = token[__expkey__].split(".")[0]
+    if datetime.strptime(token_exp_str, "%Y-%m-%dT%H:%M:%S") < datetime.now():
         print("Getting new token because stored token expired")
         token = get_token_from_api(token_endpoint, config["user"])
         config[__tokenKey__] = token
@@ -110,7 +110,7 @@ def main():
     print(f"\nGenerated Auth Header: {auth_header}")
 
     # Hit GetUserInfo endpoint
-    user_endpoint = api_url + 'api/GetUserInfo'
+    user_endpoint = api_url + "api/GetUserInfo"
     print(f"\n\nCalling {user_endpoint} with Auth Header...\n")
 
     # calling api here
@@ -119,8 +119,9 @@ def main():
     print(f"Headers from Response: {res.headers}")
     print(f"\nContent from GetUserInfo API: {res.json()}")
 
+
 # end of main #
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

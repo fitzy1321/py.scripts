@@ -30,7 +30,7 @@ def for_loop_with_incr(n=100_000_000):
     s = 0
     for i in range(n):
         s += i
-        i += 1 # redundent increment
+        i += 1  # redundent increment
     return s
 
 
@@ -38,7 +38,8 @@ def for_loop_with_test(n=100_000_000):
     """Demonstrate while loop test, show why while loop is slow."""
     s = 0
     for i in range(n):
-        if i < n: pass # redundent test
+        if i < n:
+            pass  # redundent test
         s += i
     return s
 
@@ -47,7 +48,8 @@ def for_loop_with_incr_and_test(n=100_000_000):
     """Not as bad as while looop (because of iterators), but still worse than standard for loop."""
     s = 0
     for i in range(n):
-        if i < n: pass
+        if i < n:
+            pass
         s += i
         i += 1
     return s
@@ -61,7 +63,7 @@ def sum_range(n=100_000_000):
 
 
 # There was also a numpy example, but I didn't feel like installing numpy
-# numpy wil usually be faster than builtin methods, because numpy is 
+# numpy wil usually be faster than builtin methods, because numpy is
 # primarily written in C.
 
 
@@ -84,6 +86,5 @@ def main():
     print("pure math\t\t", timeit.timeit(math_sum, number=1))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
