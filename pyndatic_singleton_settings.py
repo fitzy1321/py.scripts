@@ -1,3 +1,4 @@
+from devtools import debug
 from pydantic import BaseSettings, validator
 
 # DO NOT IMPORT FROM HERE
@@ -22,19 +23,19 @@ class APISettings:
     _instance = None
 
     class Settings(BaseSettings):
-        conn_str = ""
-        username = ""
-        password = ""
-        env = ""
+        # conn_str = ""
+        # username = ""
+        # password = ""
+        # env = ""
 
         class Config:
             env_file = ".env"
 
-        @validator("*")
-        def must_have_value(cls, v):
-            if v in [None, ""]:
-                raise ValueError("Env variables not loaded.")
-            return v
+        # @validator("*")
+        # def must_have_value(cls, v):
+        #     if v in [None, ""]:
+        #         raise ValueError("Env variables not loaded.")
+        #     return v
 
     def __new__(cls):
         if cls._instance is None:
@@ -43,4 +44,8 @@ class APISettings:
 
     def __init__(self) -> None:
         self._settings = self.Settings()
-        self.app_name = f"{self._settings.env}.app.com"
+        # self.app_name = f"{self._settings.env}.app.com"
+
+
+settings = APISettings()
+debug(settings)
