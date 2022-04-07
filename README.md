@@ -23,7 +23,7 @@ add `.gitattributes` and add this line
 
 ```sh
 # subsitute any other nosiy file here
-poetry.lock binary
+poetry.lock -diff
 ```
 
 Git will interpret the file (or extension with `*.whatever`) as a binary file 
