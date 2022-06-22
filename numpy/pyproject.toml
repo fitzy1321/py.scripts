@@ -6,7 +6,7 @@ authors = ["fitzypop <fitzypop@pm.me>"]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.11"
-numpy = "^1.21.4"
+numpy = "^1.22.0"
 
 [tool.poetry.dev-dependencies]
 
