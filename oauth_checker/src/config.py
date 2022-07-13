@@ -6,7 +6,8 @@ Config class should behave just like a dict object because
 it inherits from dict.
 """
 import atexit  # for object cleanup
-import json
+
+import orjson
 
 
 class ConfigManager(dict):
@@ -27,14 +28,18 @@ class ConfigManager(dict):
         """Read json data from __datafile__."""
         with open(self.__datafile__, "r") as datafile:
             # main method will catch FileNotFound exception
-            self.__datadict__ = json.load(datafile)
+            self.__datadict__ = orjson.loads(datafile.read())
 
     def __cleanup__(self):
         """__cleanup method replaces __del__ dunder method."""
         if self.__hasAltered__:
-            f = open(self.__datafile__, "w")
-            json.dump(self.__datadict__, f, indent=2)
-            f.close()
+            with open(self.__datafile__, "w") as f:
+                f.write(
+                    orjson.dumps(
+                        self.__datadict__,
+                        option=orjson.OPT_INDENT_2,
+                    ).decode("utf-8")
+                )
 
     def __setitem__(self, key, item):
         """See dunder method docs for info on '__setitem__' method."""

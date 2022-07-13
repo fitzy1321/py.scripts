@@ -8,10 +8,8 @@ It will then uses the token to make a couple requests against the api.
 
 from datetime import datetime
 
-import requests
-
 from src.config import ConfigManager
-from src.helpers import exit_now, get_debug_url
+from src.helpers import exit_now
 from src.requests_fn import get_request, post_request
 
 __tokenKey__ = "access_token"
