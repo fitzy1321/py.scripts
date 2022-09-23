@@ -76,7 +76,7 @@ async def call_api_async(
     method: str = "GET",
     params: Optional[dict[Any, Any]] = None,
     no_retry: Optional[set[int]] = None,
-) -> dict[str, Any]:
+) -> dict[Any, Any]:
     """
     Make an asynchronous request to a API endpoint.
     """
@@ -94,19 +94,21 @@ async def call_api_async(
         raise e
 
 
-async def do_async_things(i):
+async def do_async_things(id: int) -> Any:
+    """The following await calls will still run sequentially, but on the event loop"""
     await asyncio.sleep(1)
     return await call_api_async(
-        f"https://fakestoreapi.com/products/{i}", no_retry={400, 403, 404}
+        f"https://fakestoreapi.com/products/{id}", no_retry={400, 403, 404}
     )
 
 
-async def main():
+async def main() -> int:
     # immediately puts task onto event loop with `asyncio.create_task(...)`
-    tasks = [asyncio.create_task(do_async_things(i)) for i in range(1, 20)]
-
-    # wait for all tasks to finish
-    results = await asyncio.gather(*tasks)
+    # unpack all the tasks
+    # wait for all concurrent tasks to finish
+    results = await asyncio.gather(
+        *[asyncio.create_task(do_async_things(id)) for id in range(1, 20)]
+    )
 
     # loop over results of multiple async calls
     for r in results:
