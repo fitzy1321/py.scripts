@@ -1,19 +1,21 @@
 from unittest.mock import MagicMock
 
-import aiohttp  # pip install aiohttp
-import pytest  # pip install pytest pytest-asyncio
-from asyncmock import AsyncMock  # pip install asyncmock
+import aiohttp
+import pytest
+from asyncmock import AsyncMock
 
 # pytest -rP test_aiohttp_mock.py
 
 
 @pytest.fixture
 def aiomock() -> tuple:
-    session = AsyncMock()
     response = AsyncMock()
     response.json.return_value = {"body": "asdf"}
     response.raise_for_status = MagicMock(side_effect=aiohttp.ClientError)
+
+    session = AsyncMock()
     session.request = MagicMock(return_value=response)
+
     return session, response
 
 
