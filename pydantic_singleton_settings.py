@@ -1,5 +1,5 @@
 from devtools import debug
-from pydantic import BaseSettings, validator
+from pydantic import BaseSettings
 
 # DO NOT IMPORT FROM HERE
 # There is a global apisettings object in api/__init__.py/

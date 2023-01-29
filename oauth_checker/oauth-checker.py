@@ -33,7 +33,7 @@ def get_token_from_api(oauth_url: str, user_model: dict):
     res = post_request(url=oauth_url, data=user_model)
     print(f"Status Code from Auth Endpoint: {res.status_code}")
 
-    if res.status_code is not 200:
+    if res.status_code != 200:
         exit_now()
 
     data = res.json()
@@ -84,8 +84,8 @@ def main():
 
     if __urlKey__ not in config:
         print(
-            f"Please enter the url for the api in app.data.json with key "
-            "'{__urlKey__}'."
+            "Please enter the url for the api in app.data.json with key "
+            f"'{__urlKey__}'."
         )
         exit_now()
 
@@ -94,7 +94,7 @@ def main():
     # checking if url is correct
     print(f"Checking if api at {api_url} is up ...")
     check_api = get_request(api_url)
-    if check_api.status_code is not 200:
+    if check_api.status_code != 200:
         print(f"Could not reach {check_api}...")
         print("Either the url is wrong, or the api is not up.")
         print("Please change the url in app.data.json file or debug the api.")

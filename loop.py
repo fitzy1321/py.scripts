@@ -26,7 +26,8 @@ def for_loop(n=100_000_000):
 
 
 def for_loop_with_incr(n=100_000_000):
-    """Adding redundent increment operation to for loop, to demonstrate why while loop is slow."""
+    """Adding redundent increment operation to for loop,
+    to demonstrate why while loopis slow."""
     s = 0
     for i in range(n):
         s += i
@@ -45,7 +46,8 @@ def for_loop_with_test(n=100_000_000):
 
 
 def for_loop_with_incr_and_test(n=100_000_000):
-    """Not as bad as while looop (because of iterators), but still worse than standard for loop."""
+    """Not as bad as while looop (because of iterators),
+    but still worse than standard for loop."""
     s = 0
     for i in range(n):
         if i < n:
@@ -81,7 +83,8 @@ def main():
     print("for pure\t\t", timeit.timeit(for_loop, number=1))
     # print("for increment\t\t", timeit.timeit(for_loop_with_incr, number=1))
     # print("for test\t\t", timeit.timeit(for_loop_with_test, number=1))
-    # print("for increment and test\t", timeit.timeit(for_loop_with_incr_and_test, number=1))
+    # print("for increment and test\t", timeit.timeit(for_loop_with_incr_and_test,
+    # number=1))
     print("sum range\t\t", timeit.timeit(sum_range, number=1))
     print("pure math\t\t", timeit.timeit(math_sum, number=1))
 

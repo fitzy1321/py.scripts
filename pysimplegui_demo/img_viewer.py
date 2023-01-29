@@ -36,7 +36,7 @@ while True:
         folder = values["-FOLDER-"]
         try:
             file_list = os.listdir(folder)
-        except:
+        except Exception:
             file_list = []
 
         fnames = [
@@ -52,7 +52,7 @@ while True:
             filename = os.path.join(values["-FOLDER-"], values["-FILE LIST-"][0])
             window["-TOUT-"].update(filename)
             window["-IMAGE-"].update(filename=filename)
-        except:
+        except Exception:
             pass
 
 window.close()

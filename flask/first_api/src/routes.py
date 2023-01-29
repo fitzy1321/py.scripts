@@ -1,7 +1,6 @@
 # routes.py - flask api
 
 from flask import render_template
-
 from src import app
 
 

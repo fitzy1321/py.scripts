@@ -2,8 +2,6 @@
 
 from xml.dom import minidom
 
-from src.config import ConfigManager
-
 
 def exit_now():
     """Exit program now."""
