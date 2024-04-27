@@ -30,4 +30,4 @@ def scoped_session_maker(
         raise
     finally:
         sc_session.remove()
-        engine.dispose()  # may or not be needed. docs not clear
+        engine.dispose()  # type:ignore # may or not be needed. docs not clear

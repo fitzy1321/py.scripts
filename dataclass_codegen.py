@@ -4,7 +4,6 @@ from pprint import pprint
 
 @dataclass
 class A:
-
     num1: int
     num2: int
     float1: float
