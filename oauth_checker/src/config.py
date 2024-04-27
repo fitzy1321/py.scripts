@@ -5,6 +5,7 @@ Gets data from json file and loads it into dictionary.
 Config class should behave just like a dict object because
 it inherits from dict.
 """
+
 import atexit  # for object cleanup
 
 import orjson

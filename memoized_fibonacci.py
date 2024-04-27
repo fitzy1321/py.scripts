@@ -5,7 +5,7 @@ from functools import lru_cache
 
 @lru_cache(maxsize=1000)
 def fibonacci(n):
-    if type(n) != int:
+    if not isinstance(n, int):
         raise TypeError("n needs to be a positive int.")
     if n < 0:
         raise ValueError("n needs to be a postive int.")

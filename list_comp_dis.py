@@ -1,4 +1,5 @@
 """Print dissasembly of list comprehensions to files."""
+
 import dis
 import os.path
 
@@ -9,8 +10,10 @@ def for_loop(n: int) -> list[int]:
         m_list.append(x)
     return m_list
 
+
 def simple_list_comp(n: int) -> list[int]:
     return [x for x in range(n)]
+
 
 if __name__ == "__main__":
     base = f"{os.getcwd()}/build"
