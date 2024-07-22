@@ -1,5 +1,6 @@
 from devtools import debug
 from pydantic_settings import BaseSettings
+from functools import cache
 
 # DO NOT IMPORT FROM HERE
 # There is a global apisettings object in api/__init__.py/
@@ -47,5 +48,10 @@ class APISettings:
         # self.app_name = f"{self._settings.env}.app.com"
 
 
-settings = APISettings()
+@cache
+def get_settings():
+    return APISettings()
+
+
+settings = get_settings()
 debug(settings)
