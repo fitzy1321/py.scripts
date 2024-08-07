@@ -5,11 +5,18 @@ from collections import defaultdict
 from timeit import timeit
 from typing import AbstractSet
 
+import cProfile
+import pstats
+
 
 def _min_no_none(a, b):
-    if a is None:
+    a_is_none = a is None
+    b_is_none = b is None
+    if a_is_none and b_is_none:
+        raise ValueError("At least one value is needed")
+    if a_is_none:
         return b
-    if b is None:
+    if b_is_none:
         return a
     return min(a, b)
 
@@ -79,6 +86,7 @@ def _dedup_combos_v2(combo_list: list[list[int]]) -> list[list[int]]:
     sameses: dict[tuple[int, frozenset[int]], list[int]] = {}
     for combo in combo_list:
         key = (len(combo), frozenset(combo))
+        # this is _technically_ faster, but only by miliseconds, so may not be worth it ...
         if key in sameses:
             continue
         sameses[key] = combo
@@ -107,6 +115,7 @@ def normalized_possibilities(
     target: int,
     coins: frozenset[int],
 ) -> dict[int, list[list[int]]]:
+    # TODO: I should throw this function into a flame graph
     result = full_list_possibilities(target, coins)
     final = _dedup_combos_v2(result)
     return {len(final): sorted(final, key=len)}
@@ -120,12 +129,21 @@ if __name__ == "__main__":
     print(f"Target Sum in Cents: {target}")
     print(f"Set of Coin values: {coin_set}")
     print()  # newline
-    print(f"{min_coins(target, coin_set)=}")
-    print(f"{min_coins_memoized(target, coin_set)=}")
-    print(f"{how_many_possibilities(target, coin_set)=}")
-    print(f"{normalized_possibilities(target, coin_set)=}")
+    with cProfile.Profile() as profile:
+        print(f"{min_coins(target, coin_set)=}")
+        print(f"{min_coins_memoized(target, coin_set)=}")
+        print(f"{how_many_possibilities(target, coin_set)=}")
+        print(f"{normalized_possibilities(target, coin_set)=}")
 
-    results = full_list_possibilities(target, coin_set)
-    print("Attempts to optimize the deduplication function: smaller is better")
-    print(f"{timeit(lambda: _dedup_combos(results), number=5)=}")
-    print(f"{timeit(lambda: _dedup_combos_v2(results), number=5)=}")
+        combos = full_list_possibilities(target, coin_set)
+        print("Attempts to optimize the deduplication function: smaller is better")
+        print(f"{timeit(lambda: _dedup_combos(combos), number=5)=}")
+        print(f"{timeit(lambda: _dedup_combos_v2(combos), number=5)=}")
+
+    results = pstats.Stats(profile)
+    results.sort_stats(pstats.SortKey.TIME)
+    results.print_stats()
+    results.dump_stats("build/coin_change_perf.prof")
+    # in shell:
+    # # pip install -U tuna
+    # tuna build/coin_change_perf.prof
