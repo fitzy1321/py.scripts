@@ -2,6 +2,7 @@
 
 from functools import lru_cache
 from collections import defaultdict
+from timeit import timeit
 
 
 def _min_no_none(a, b):
@@ -73,7 +74,19 @@ def _dedup_combos(combo_list: list[list[int]]) -> list[list[int]]:
     return list(sameses.values())
 
 
-def deduplicated_combos(target: int, coins: set[int]) -> dict[int, list[list[int]]]:
+def _dedup_combos_v2(combo_list: list[list[int]]) -> list[list[int]]:
+    sameses: set[tuple[int, frozenset[int]]] = set()
+    results = []
+    for coins in combo_list:
+        key = (len(coins), frozenset(coins))
+        if key in sameses:
+            continue
+        sameses.add(key)
+        results.append(coins)
+    return results
+
+
+def full_list_possibilities(target: int, coins: set[int]) -> list[list[int]]:
     def recurse(coins, target, current_combination, current_sum):
         if current_sum == target:
             result.append(list(current_combination))
@@ -87,19 +100,32 @@ def deduplicated_combos(target: int, coins: set[int]) -> dict[int, list[list[int
 
     result = []
     recurse(coins, target, [], 0)
-    final = _dedup_combos(result)
-    return {len(final): final}
+    return result
+
+
+def normalized_possibilities(
+    target: int,
+    coins: set[int],
+) -> dict[int, list[list[int]]]:
+    result = full_list_possibilities(target, coins)
+    final = _dedup_combos_v2(result)
+    return {len(final): sorted(final, key=len)}
 
 
 if __name__ == "__main__":
-    target = 13
-    s_coins = {1, 4, 5}
+    target = 55
+    coin_set = {1, 5, 10, 25, 50}
 
     print("~~ Coin Change Program ~~\n")
     print(f"Target Sum in Cents: {target}")
-    print(f"Set of Coin values: {s_coins}")
+    print(f"Set of Coin values: {coin_set}")
     print()  # newline
-    print(f"{min_coins(target, s_coins)=}")
-    print(f"{min_coins_memoized(target, frozenset(s_coins))=}")
-    print(f"{how_many_possibilities(target, s_coins)=}")
-    print(f"{deduplicated_combos(target, s_coins)=}")
+    print(f"{min_coins(target, coin_set)=}")
+    print(f"{min_coins_memoized(target, frozenset(coin_set))=}")
+    print(f"{how_many_possibilities(target, coin_set)=}")
+    print(f"{normalized_possibilities(target, coin_set)=}")
+
+    results = full_list_possibilities(target, coin_set)
+    print("Attempts to optimize the deduplication function: smaller is better")
+    print(f"{timeit(lambda: _dedup_combos(results), number=5)=}")
+    print(f"{timeit(lambda: _dedup_combos_v2(results), number=5)=}")
