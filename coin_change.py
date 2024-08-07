@@ -1,49 +1,58 @@
-from functools import cache
+# from functools import lru_cache
 from collections import defaultdict
 
 
-def min_no_none(a: int | None, b: int | None):
+def _min_no_none(a, b):
     if a is None:
         return b
     if b is None:
         return a
-    return int(min(a, b))
+    return min(a, b)
 
 
-def min_coins(max_x: int, coins: set[int]):
-    answer = 0
-    if max_x == 0:
-        return answer
+def min_num_of_coins(target: int, coins: set[int]):
+    if not hasattr(min_num_of_coins, "memo"):
+        min_num_of_coins.memo = {}
+
+    try:
+        return min_num_of_coins.memo[target]
+    except KeyError:
+        pass
+
+    if target == 0:
+        answer = 0
     else:
+        answer = None
         for coin in coins:
-            sub = max_x - coin
+            sub = target - coin
             if sub < 0:
                 continue
-            answer = min_no_none(answer, min_coins(sub, coins) + 1)
+            answer = _min_no_none(answer, min_num_of_coins(sub, coins) + 1)  # type: ignore
 
+    min_num_of_coins.memo[target] = answer
     return answer
 
 
-@cache
-def min_coins_memoized(max_x: int, coins: set[int]):
-    answer = 0
-    if max_x == 0:
-        return answer
-    else:
-        for coin in coins:
-            sub = max_x - coin
-            if sub < 0:
-                continue
-            answer = min_no_none(answer, min_coins_memoized(sub, coins) + 1)
+# @lru_cache
+# def min_coins_memoized(target: int, coins: set[int]):
+#     answer = 0
+#     if target == 0:
+#         return answer
+#     else:
+#         for coin in coins:
+#             sub = target - coin
+#             if sub < 0:
+#                 continue
+#             answer = _min_no_none(answer, min_coins_memoized(sub, coins) + 1)
 
-    return answer
+#     return answer
 
 
-def how_many_ways(m, coins):
+def how_many_ways(target, coins):
     memo = defaultdict(lambda: 0)
 
     memo[0] = 1
-    for i in range(1, m + 1):
+    for i in range(1, target + 1):
         memo[i] = 0
         for coin in coins:
             sub = i - coin
@@ -51,7 +60,7 @@ def how_many_ways(m, coins):
                 continue
             memo[i] = memo[i] + memo[sub]
 
-    return memo[m]
+    return memo[target]
 
 
 def all_coin_combs(target: int, coins: set[int]) -> dict[int, list[list[int]]]:
@@ -68,11 +77,22 @@ def all_coin_combs(target: int, coins: set[int]) -> dict[int, list[list[int]]]:
 
     result = []
     recurse(coins, target, [], 0)
-    return {len(result): result}
+    return {len(result): sorted(result, key=len)}
 
 
-print(all_coin_combs(4, {1, 2, 5}))
-print("Next Steps, how to deduplicate unorder coin combo lists?")
-print(
-    "[1,1,2], [1,2,1], and [2,1,1] are technically the same combo in different orders"
-)
+if __name__ == "__main__":
+    target = 13
+    s_coins = {1, 4, 5}
+
+    print("~~ Coin Change Program ~~\n")
+    print(f"Target Sum in Cents: {target}")
+    print(f"Set of Coin values: {s_coins}")
+    print()  # newline
+    print(f"{min_num_of_coins(target, s_coins)=}")
+    # print(f"{min_coins_memoized(target, s_coins)=}")
+    print(f"{how_many_ways(target, s_coins)=}")
+    print(f"{all_coin_combs(target, s_coins)=}")
+    print("\nNext Steps, how to deduplicate unorder coin combo lists?")
+    print(
+        "[1,1,2], [1,2,1], and [2,1,1] are technically the same combo in different orders"
+    )
