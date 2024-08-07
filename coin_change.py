@@ -72,7 +72,7 @@ def all_coin_combs(target: int, coins: set[int]) -> dict[int, list[list[int]]]:
 
 
 print(all_coin_combs(4, {1, 2, 5}))
-
-
-# shit, there's technically duplicate combos.
-# They're unsorted duplicated, but the same combo of [1,1,2].
+print("Next Steps, how to deduplicate unorder coin combo lists?")
+print(
+    "[1,1,2], [1,2,1], and [2,1,1] are technically the same combo in different orders"
+)
