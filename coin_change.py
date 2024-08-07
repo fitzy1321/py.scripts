@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
-
 from functools import lru_cache
 from collections import defaultdict
+import os
 from timeit import timeit
 from typing import AbstractSet
 
@@ -143,6 +142,10 @@ if __name__ == "__main__":
     results = pstats.Stats(profile)
     results.sort_stats(pstats.SortKey.TIME)
     results.print_stats()
+    # check if build dir exists
+    if not os.path.exists("build"):
+        os.mkdir("build")
+
     results.dump_stats("build/coin_change_perf.prof")
     # in shell:
     # # pip install -U tuna
