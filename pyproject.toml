@@ -6,7 +6,7 @@ authors = ["fitzypop <fitzypop@pm.me>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-aiohttp = "^3.10"
+aiohttp = "*"
 bson = "^0.5.10"
 cachetools = "^5.4.0"
 devtools = "^0.12"
@@ -17,7 +17,7 @@ psutil = "^6.0.0"
 pydantic = "^2.8.2"
 pydantic-settings = "^2.3.4"
 PySimpleGUI = "^5"
-requests = "^2.32.3"
+requests = "*"
 SQLAlchemy = "^1.4.39"
 
 
