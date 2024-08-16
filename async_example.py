@@ -7,7 +7,6 @@ from typing import Any, Awaitable, Callable, Optional, Type, TypeVar, Union
 
 import aiohttp  # pip install --upgrade aiohttp
 
-
 log = logging.getLogger(__name__)
 
 BACKOFF = 2
