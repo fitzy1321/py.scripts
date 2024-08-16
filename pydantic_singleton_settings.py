@@ -1,6 +1,7 @@
+from functools import cache
+
 from devtools import debug
 from pydantic_settings import BaseSettings
-from functools import cache
 
 # DO NOT IMPORT FROM HERE
 # There is a global apisettings object in api/__init__.py/

@@ -1,7 +1,5 @@
 from functools import lru_cache
 
-# Using tool to cache function values
-
 
 @lru_cache(maxsize=1000)
 def fibonacci(n):

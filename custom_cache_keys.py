@@ -2,7 +2,8 @@
 
 from datetime import timedelta
 from random import randint
-from cachetools import cached, TTLCache
+
+from cachetools import TTLCache, cached
 from cachetools.keys import hashkey
 
 

@@ -1,5 +1,3 @@
-# noqa
-
 from pprint import pprint
 
 

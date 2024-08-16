@@ -1,6 +1,7 @@
-"""Fun looping stuff from mCoding."""
+"""Fun looping stuff from mCoding.
 
-# Video Source: https://www.youtube.com/watch?v=Qgevy75co8c
+Source: https://www.youtube.com/watch?v=Qgevy75co8c
+"""
 
 import timeit
 

@@ -1,11 +1,10 @@
-from functools import lru_cache
-from collections import defaultdict
+import cProfile
 import os
+import pstats
+from collections import defaultdict
+from functools import lru_cache
 from timeit import timeit
 from typing import AbstractSet
-
-import cProfile
-import pstats
 
 
 def _min_no_none(a, b):
@@ -22,10 +21,10 @@ def _min_no_none(a, b):
 
 def min_coins(target, coins):
     if not hasattr(min_coins, "memo"):
-        min_coins.memo = {}
+        min_coins.memo = {}  # type:ignore
 
     try:
-        return min_coins.memo[target]
+        return min_coins.memo[target]  # type:ignore
     except KeyError:
         pass
 
@@ -39,7 +38,7 @@ def min_coins(target, coins):
                 continue
             answer = _min_no_none(answer, min_coins(sub, coins) + 1)  # type: ignore
 
-    min_coins.memo[target] = answer
+    min_coins.memo[target] = answer  # type:ignore
     return answer
 
 

@@ -1,5 +1,7 @@
-# Find the lowest, postive integer not present in a list of numbers
-# Ignore 0 or negative numbers
+"""Find the lowest, postive integer not present in a list of numbers
+
+Ignore 0 or negative numbers
+"""
 
 
 def solution(nums: list[int]) -> int:

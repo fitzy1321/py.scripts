@@ -1,6 +1,7 @@
-import psutil
 import time
+
 import matplotlib.pyplot as plt
+import psutil
 
 # pip install matplotlib psutil
 

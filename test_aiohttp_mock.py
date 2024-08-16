@@ -7,6 +7,7 @@ Run the following to get started
 pip install --upgrade aiohttp pytest pytest-asyncio
 pytest -rP "test_aiohttp_mock.py"
 """
+
 import sys
 
 import pytest
