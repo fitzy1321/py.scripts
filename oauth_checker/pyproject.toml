@@ -1,17 +1,10 @@
-[tool.poetry]
+[project]
 name = "oauth_checker"
 version = "0.1.0"
 description = ""
-authors = ["fitzypop <fitzypop@pm.me>"]
-
-[tool.poetry.dependencies]
-python = "^3.10"
-requests = "^2.32.0"
-orjson = "^3.9.15"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+authors = [{ name = "fitzypop", email = "fitzypop@pm.me" }]
+requires-python = "~=3.10"
+dependencies = ["requests>=2.32.0,<3", "orjson>=3.9.15,<4"]
 
 [tool.pyright]
 venvPath = "."
