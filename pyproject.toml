@@ -3,7 +3,7 @@ name = "py.scripts"
 version = "0.1.0"
 description = ""
 authors = [{ name = "fitzypop", email = "fitzypop@pm.me" }]
-requires-python = "~=3.10"
+requires-python = ">=3.10"
 dependencies = [
     "aiohttp",
     "bson>=0.5.10,<0.6",
