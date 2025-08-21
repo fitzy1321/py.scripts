@@ -4,7 +4,10 @@ import random
 
 import typer
 
+app = typer.Typer(context_settings={"help_option_names": ["-h", "--help"]})
 
+
+@app.command()
 def main(sentence: str):
     choices = [0, 1, 1, 2, 3, 4]
 
@@ -30,4 +33,4 @@ def main(sentence: str):
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()
