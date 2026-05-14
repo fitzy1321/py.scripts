@@ -1,4 +1,20 @@
 from pprint import pprint
+from typing import Any
+
+
+def deep_equal(a: Any, b: Any) -> bool:
+    """Recusively compare 'basic' python types and containers for equality ✊."""
+    if type(a) is not type(b):
+        return False
+    if isinstance(a, dict):
+        if a.keys() != b.keys():
+            return False
+        return all(deep_equal(a[k], b[k]) for k in a)
+    if isinstance(a, (list, tuple)):
+        if len(a) != len(b):
+            return False
+        return all(deep_equal(x, y) for x, y in zip(a, b))
+    return a == b
 
 
 def main():  # noqa
